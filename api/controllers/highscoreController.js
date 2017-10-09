@@ -1,8 +1,43 @@
 'use strict';
-
+let http = require('http'),
+    fs = require('fs');
 
 var mongoose = require('mongoose'),
   Highscore = mongoose.model('Highscores');
+
+
+exports.main = function(req, res){
+    fs.readFile('./index.html', 'utf-8', function (err, html) {
+      if (err) {
+          throw err;
+      }
+    res.writeHeader(200, {"Content-Type": "text/html"});
+    res.write(html);
+    res.end();
+  });
+}
+
+exports.scripts = function(req, res){
+    fs.readFile('./app.js', 'utf-8', function (err, html) {
+      if (err) {
+          throw err;
+      }
+    res.writeHeader(200, {"Content-Type": "text/javascript"});
+    res.write(html);
+    res.end();
+  });
+}
+
+exports.styles = function(req, res){
+    fs.readFile('./style.css', 'utf-8', function (err, html) {
+      if (err) {
+          throw err;
+      }
+    res.writeHeader(200, {"Content-Type": "text/css"});
+    res.write(html);
+    res.end();
+  });
+}
 
 exports.list_all_highscores = function(req, res) {
   Highscore.find({}, function(err, highscore) {

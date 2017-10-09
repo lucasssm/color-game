@@ -7,6 +7,14 @@ module.exports = function(app) {
     .get(highscore.list_all_highscores)
     .post(highscore.create_a_highscore);
 
+  app.route('/index.html')
+    .get(highscore.main);
+
+  app.route('/app.js')
+    .get(highscore.scripts);
+
+  app.route('/style.css')
+    .get(highscore.styles);
 
   app.route('/highscores/:highscoreId')
     .get(highscore.read_a_highscore)
