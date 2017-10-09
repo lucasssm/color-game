@@ -33,10 +33,36 @@ body {
     font-size: 17px;
 }
 
-#formSender.show {
+#formSender.showDiv {
     visibility: visible;
+		min-width: 250px;
 }
 
+#scoreList {
+	visibility: hidden;
+	background-color: #333;
+	border-radius: 2px;
+	position: fixed;
+	z-index: 1;
+	bottom: 30px;
+	width: 200px;
+	height: 300px;
+	left: 0;
+	right: 0;
+	top: 15%;
+	bottom: 0;
+	margin: auto auto;
+	font-size: 17px;
+	color: white;
+
+}
+
+#scoreList.showDiv {
+	visibility: visible;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
 
 .roundedCorners {
 	border-radius: 25px;
@@ -44,6 +70,10 @@ body {
 
 .centeredText {
 	text-align: center;
+}
+.Button {
+	text-align: center;
+	font-size: 0.4em;
 }
 
 .centeredText {

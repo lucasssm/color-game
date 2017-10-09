@@ -13,6 +13,9 @@
 	<span id="actualCorrect">Current Score: 0</span>
 	<span id="highscore">Highscore: </span>
 </div>
+<div class="centeredText">
+<button onclick="show('scoreList')" class="Button">Show Highscore!</button>
+</div>
 <div class="row">
 	<div class="col-md-3 colorBlock roundedCorners" id="block1" onclick="endGame(this)"></div>
 	<div class="col-md-3 colorBlock roundedCorners" id="block2" onclick="endGame(this)"></div>
@@ -40,7 +43,7 @@
   <button type="button" value="Submit" onclick="sendScore()">Send!</button>
 </form>
 </div>
-<div id="scoreList"></div>
+<ol id="scoreList"></ol>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
 </body>

@@ -66,7 +66,7 @@ let updateScore = function () {
 		actualCorrect++;
 	}else{
 		incorrect++;
-		showSendScore();
+		show("formSender");
 	}
 	actualCorrect > highscore ? highscore = actualCorrect : highscore = highscore;
 }
@@ -97,7 +97,7 @@ let sendScore = function () {
 		console.log(response);
 		actualCorrect = 0;
 		updateScoreText();
-		hideSendScore();
+		show("formSender");
 		startGame();
 	})
 	.catch(function(error){
@@ -118,25 +118,32 @@ let getHighest = function() {
 		});
 }
 
-let showSendScore = function(){
-	let x = document.getElementById("formSender");
-	x.className = "show";
+let show = function(div){
+	let x = document.getElementById(div);
+	if(x.className === "showDiv"){
+		x.className = ""
+	}else{
+		x.className = "showDiv";
+	}
 }
 
-let hideSendScore = function (){
-	let x = document.getElementById("formSender");
-	x.className = "";
-}
+// let hide = function (div){
+// 	let x = document.getElementById(div);
+// 	x.className = "";
+// }
 
 let getScoreList = function(){
 	axios.get('http://localhost:3000/highscores/')
 		.then(function(response){
-			let list = document.createElement("li");
-			for(let i = 0; i < response.data.length; i++){
-				list.appendChild(document.createTextNode(response.data[i].name + " - " + response.data[i].score));
-			}
 			let element = document.getElementById("scoreList");
-			element.appendChild(list);
+			while (element.firstChild) {
+    		element.removeChild(element.firstChild);
+			}
+			for(let i = 0; i < response.data.length; i++){
+				let list = document.createElement("li");
+				list.appendChild(document.createTextNode(response.data[i].name + " - " + response.data[i].score));
+				element.appendChild(list);
+			}
 		})
 		.catch(function(error){
 			console.log(error);

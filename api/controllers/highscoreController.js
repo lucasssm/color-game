@@ -43,9 +43,13 @@ exports.list_all_highscores = function(req, res) {
   Highscore.find({}, function(err, highscore) {
     if (err)
       res.send(err);
-    res.json(highscore);
+
+    let sortedHighscore = highscore.sort(function(a,b){return b.score-a.score});
+    let top10 = sortedHighscore.slice(0,10);
+    res.json(top10);
   });
 };
+
 exports.get_highest_score = function(req, res) {
   Highscore.find({}, function(err, highscore) {
     if (err){
