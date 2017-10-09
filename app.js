@@ -27,6 +27,7 @@ let hsName = '';
 let startGame = function () {
 	setTimeout(function () {
 		getHighest();
+		getScoreList();
 		gameOver = false;
 		assignColor(blocksArray);
 		pickAnswer();
@@ -125,6 +126,21 @@ let showSendScore = function(){
 let hideSendScore = function (){
 	let x = document.getElementById("formSender");
 	x.className = "";
+}
+
+let getScoreList = function(){
+	axios.get('http://localhost:3000/highscores/')
+		.then(function(response){
+			let list = document.createElement("li");
+			for(let i = 0; i < response.data.length; i++){
+				list.appendChild(document.createTextNode(response.data[i].name + " - " + response.data[i].score));
+			}
+			let element = document.getElementById("scoreList");
+			element.appendChild(list);
+		})
+		.catch(function(error){
+			console.log(error);
+		});
 }
 
 let assignColor = function (needsColor, color) {
